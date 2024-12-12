@@ -43,7 +43,49 @@ const data = [
     Primes: 5000,
     Charges: 23000,
     Total: 74000
-  }
+  },
+  {
+    name: 'Juil',
+    Salaires: 46000,
+    Primes: 5000,
+    Charges: 23000,
+    Total: 74000
+  },
+  {
+    name: 'Aout',
+    Salaires: 46000,
+    Primes: 5000,
+    Charges: 23000,
+    Total: 74000
+  },
+  {
+    name: 'Sept',
+    Salaires: 46000,
+    Primes: 5000,
+    Charges: 23000,
+    Total: 74000
+  },
+  {
+    name: 'Oct',
+    Salaires: 46000,
+    Primes: 5000,
+    Charges: 23000,
+    Total: 74000
+  },
+  {
+    name: 'Nov',
+    Salaires: 46000,
+    Primes: 5000,
+    Charges: 23000,
+    Total: 74000
+  },
+  {
+    name: 'Déc',
+    Salaires: 46000,
+    Primes: 5000,
+    Charges: 23000,
+    Total: 74000
+  },
 ];
 
 const StackedBarChart: React.FC = () => {
@@ -53,17 +95,17 @@ const StackedBarChart: React.FC = () => {
         Répartition des Dépenses Mensuelles (en €)
       </h3>
       <ResponsiveContainer width="100%" height={450}>
-        <BarChart 
-          data={data} 
+        <BarChart
+          data={data}
           margin={{ top: 20, right: 30, left: 50, bottom: 20 }}
         >
           <CartesianGrid strokeDasharray="3 3" stroke="#718096" strokeOpacity={0.2} />
-          <XAxis 
-            dataKey="name" 
+          <XAxis
+            dataKey="name"
             tick={{ fill: '#718096' }}
             axisLine={{ stroke: '#718096', strokeOpacity: 0.2 }}
           />
-          <YAxis 
+          <YAxis
             tick={{ fill: '#718096' }}
             axisLine={{ stroke: '#718096', strokeOpacity: 0.2 }}
           >
@@ -75,8 +117,8 @@ const StackedBarChart: React.FC = () => {
               style={{ textAnchor: 'middle', fill: '#718096' }}
             />
           </YAxis>
-          <Tooltip 
-            contentStyle={{ 
+          <Tooltip
+            contentStyle={{
               backgroundColor: '#1E293B',
               border: 'none',
               borderRadius: '8px',
@@ -84,31 +126,31 @@ const StackedBarChart: React.FC = () => {
             }}
             formatter={(value: number) => new Intl.NumberFormat('fr-FR').format(value) + ' €'}
           />
-          <Legend 
+          <Legend
             verticalAlign="top"
             height={36}
             wrapperStyle={{ paddingBottom: '20px' }}
           />
-          <Bar 
-            dataKey="Salaires" 
-            stackId="a" 
+          <Bar
+            dataKey="Salaires"
+            stackId="a"
             fill="#4F46E5"
             radius={[4, 4, 0, 0]}
           />
-          <Bar 
-            dataKey="Primes" 
-            stackId="a" 
+          <Bar
+            dataKey="Primes"
+            stackId="a"
             fill="#10B981"
             radius={[4, 4, 0, 0]}
           />
-          <Bar 
-            dataKey="Charges" 
-            stackId="a" 
+          <Bar
+            dataKey="Charges"
+            stackId="a"
             fill="#F59E0B"
             radius={[4, 4, 0, 0]}
           />
-          <Bar 
-            dataKey="Total" 
+          <Bar
+            dataKey="Total"
             stackId="b"
             fill="#475569"
             radius={[4, 4, 0, 0]}

@@ -1,35 +1,27 @@
-import React, { forwardRef, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import React, { forwardRef } from 'react';
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   name: string;
   placeholder?: string;
+  options: { value: string; label: string }[];
   marginTop?: string;
   marginBottom?: string;
   rounded?: string;
   error?: string;
   register?: any;
-  type?: string;
 }
 
-const Input = forwardRef<HTMLInputElement, InputProps>(
+const Select = forwardRef<HTMLSelectElement, SelectProps>(
   ({
     name,
-    placeholder,
+    options,
     marginTop,
+    placeholder,
     marginBottom,
     rounded = 10,
     error,
     register,
-    type = 'text',
   }) => {
-    const [showPassword, setShowPassword] = useState(false);
-
-    const togglePasswordVisibility = () => {
-      setShowPassword(!showPassword);
-    };
-
     return (
       <div className="w-full flex flex-col gap-2">
         <div
@@ -39,12 +31,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             marginBottom: `${marginBottom}px`,
           }}
         >
-          <input
+          <select
             {...register}
             name={name}
-            type={
-              type === 'password' ? (showPassword ? 'text' : 'password') : type
-            }
+            placeholder={placeholder}
             style={{
               borderRadius: `${rounded}px`,
             }}
@@ -59,13 +49,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               dark:border-form-strokedark
               text-black
               dark:text-white
-              placeholder:text-gray-500
-              dark:placeholder:text-bodydark
               outline-none
               transition-all
               duration-200
               hover:border-primary
-              hover:bg-gray-100
               dark:hover:bg-gray-800
               focus:border-primary
               focus:shadow-[0_0_0_3px_rgba(60,80,224,0.15)]
@@ -74,20 +61,13 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                 : ''
               }
             `}
-            placeholder={placeholder}
-          />
-          {type === 'password' && (
-            <button
-              type="button"
-              onClick={togglePasswordVisibility}
-              className="absolute w-[50px] right-0 top-0 bottom-0 flex items-center justify-center text-gray-500 hover:text-primary focus:outline-none"
-            >
-              <FontAwesomeIcon
-                icon={showPassword ? faEye : faEyeSlash}
-                className="w-[23px] h-[23px]"
-              />
-            </button>
-          )}
+          >
+            {options.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
         </div>
         {error && <span className="text-sm text-danger">{error}</span>}
       </div>
@@ -95,6 +75,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
   },
 );
 
-Input.displayName = 'Input';
+Select.displayName = 'Select';
 
-export default Input;
+export default Select;

@@ -1,5 +1,6 @@
 import { Login, Dashboard, Users, Locations, Roles, Contracts, Bonuses } from '../pages';
 import NotFound from '../common/NotFound';
+import Projects from '../pages/Projects/Projects';
 
 export const pages = [
   {
@@ -24,6 +25,12 @@ export const pages = [
     path: '/locations',
     name: 'Emplacements',
     component: Locations,
+    loader: "auth",
+  },
+  {
+    path: '/projects',
+    name: 'Projets',
+    component: Projects,
     loader: "auth",
   },
   {

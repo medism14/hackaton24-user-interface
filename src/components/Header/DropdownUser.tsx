@@ -4,9 +4,9 @@ import { useDispatch } from 'react-redux';
 import { logout } from '../../redux/features/authSlice';
 import ClickOutside from '../ClickOutside/ClickOutside';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faUserPen } from '@fortawesome/free-solid-svg-icons';
 
-const DropdownUser = () => {
+const DropdownUser = ({ user }: { user: { name?: string; role?: string; profile?: string } }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -20,22 +20,21 @@ const DropdownUser = () => {
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-            Marie Curie
+            {user.name ?? 'Marie Curie'}
           </span>
-          <span className="block text-xs">RH Toulouse</span>
+          <span className="block text-xs">{user.role ?? "RH Toulouse"}</span>
         </span>
 
         <span className="h-[25px] w-[25px] flex items-center justify-center rounded-full bg-gray-200 sm:h-[30px] sm:w-[30px] md:h-[35px] md:w-[35px]">
-          <FontAwesomeIcon
+          {user.profile ? <img src={user.profile} alt="profile" className="h-full w-full object-cover rounded-full" /> : <FontAwesomeIcon
             icon={faUser}
             className="text-gray-600 text-base sm:text-lg md:text-xl"
-          />
+          />}
         </span>
 
         <svg
-          className={`hidden fill-current sm:block ${
-            dropdownOpen ? 'rotate-180' : ''
-          }`}
+          className={`hidden fill-current sm:block ${dropdownOpen ? 'rotate-180' : ''
+            }`}
           width="12"
           height="8"
           viewBox="0 0 12 8"
@@ -52,10 +51,19 @@ const DropdownUser = () => {
 
       {/* <!-- Dropdown Start --> */}
       <div
-        className={`absolute right-0 mt-4 flex w-62.5 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark ${
-          dropdownOpen ? 'block' : 'hidden'
-        }`}
+        className={`absolute right-0 mt-4 flex w-62.5 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark ${dropdownOpen ? 'block' : 'hidden'
+          }`}
       >
+        <button
+          onClick={() => {
+            navigate('/modifier-utilisateur');
+            setDropdownOpen(false);
+          }}
+          className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
+        >
+          <FontAwesomeIcon icon={faUserPen} />
+          Profil
+        </button>
         <button
           onClick={() => {
             dispatch(logout());

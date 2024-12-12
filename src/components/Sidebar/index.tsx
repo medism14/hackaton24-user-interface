@@ -8,6 +8,8 @@ import {
   faUsers,
   faFileContract,
   faMoneyBillWave,
+  faBuilding,
+  faGear,
 } from '@fortawesome/free-solid-svg-icons';
 
 interface SidebarProps {
@@ -48,9 +50,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   return (
     <aside
       ref={sidebar}
-      className={`fixed left-0 top-0 z-50 flex h-screen w-72.5 flex-col overflow-y-hidden bg-gradient-to-b from-black to-gray-900 shadow-2xl transition-transform duration-300 ease-in-out dark:from-boxdark dark:to-gray-800 lg:static lg:translate-x-0 ${
-        sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-      }`}
+      className={`fixed left-0 top-0 z-50 flex h-screen w-72.5 flex-col overflow-y-hidden bg-gradient-to-b from-black to-gray-900 shadow-2xl transition-transform duration-300 ease-in-out dark:from-boxdark dark:to-gray-800 lg:static lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
     >
       <div className="flex items-center justify-between px-6 py-5.5 lg:py-6.5">
         <NavLink to="/" className="flex items-center justify-center flex-grow">
@@ -89,10 +90,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 to="/"
                 className={({ isActive }) =>
                   `group relative flex items-center gap-3 rounded-lg px-4 py-2.5 font-medium transition-all duration-200 ease-in-out
-                  ${
-                    isActive
-                      ? 'bg-gradient-to-r from-primary to-primary/70 text-white shadow-lg'
-                      : 'text-gray-300 hover:bg-gray-800/50 hover:text-white'
+                  ${isActive
+                    ? 'bg-gradient-to-r from-primary to-primary/70 text-white shadow-lg'
+                    : 'text-gray-300 hover:bg-gray-800/50 hover:text-white'
                   }`
                 }
               >
@@ -107,10 +107,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 to="/users"
                 className={({ isActive }) =>
                   `group relative flex items-center gap-3 rounded-lg px-4 py-2.5 font-medium transition-all duration-200 ease-in-out
-                  ${
-                    isActive
-                      ? 'bg-gradient-to-r from-primary to-primary/70 text-white shadow-lg'
-                      : 'text-gray-300 hover:bg-gray-800/50 hover:text-white'
+                  ${isActive
+                    ? 'bg-gradient-to-r from-primary to-primary/70 text-white shadow-lg'
+                    : 'text-gray-300 hover:bg-gray-800/50 hover:text-white'
                   }`
                 }
               >
@@ -121,14 +120,14 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 <span className="font-semibold">Users</span>
               </NavLink>
 
+              {/* 
               <NavLink
                 to="/locations"
                 className={({ isActive }) =>
                   `group relative flex items-center gap-3 rounded-lg px-4 py-2.5 font-medium transition-all duration-200 ease-in-out
-                  ${
-                    isActive
-                      ? 'bg-gradient-to-r from-primary to-primary/70 text-white shadow-lg'
-                      : 'text-gray-300 hover:bg-gray-800/50 hover:text-white'
+                  ${isActive
+                    ? 'bg-gradient-to-r from-primary to-primary/70 text-white shadow-lg'
+                    : 'text-gray-300 hover:bg-gray-800/50 hover:text-white'
                   }`
                 }
               >
@@ -138,15 +137,33 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 />
                 <span className="font-semibold">Locations</span>
               </NavLink>
+               */}
 
+              <NavLink
+                to="/projects"
+                className={({ isActive }) =>
+                  `group relative flex items-center gap-3 rounded-lg px-4 py-2.5 font-medium transition-all duration-200 ease-in-out
+                  ${isActive
+                    ? 'bg-gradient-to-r from-primary to-primary/70 text-white shadow-lg'
+                    : 'text-gray-300 hover:bg-gray-800/50 hover:text-white'
+                  }`
+                }
+              >
+                <FontAwesomeIcon
+                  icon={faBuilding}
+                  className="w-5 h-5 transition-transform duration-200 group-hover:scale-110"
+                />
+                <span className="font-semibold">Projects</span>
+              </NavLink>
+
+              {/* 
               <NavLink
                 to="/roles"
                 className={({ isActive }) =>
                   `group relative flex items-center gap-3 rounded-lg px-4 py-2.5 font-medium transition-all duration-200 ease-in-out
-                  ${
-                    isActive
-                      ? 'bg-gradient-to-r from-primary to-primary/70 text-white shadow-lg'
-                      : 'text-gray-300 hover:bg-gray-800/50 hover:text-white'
+                  ${isActive
+                    ? 'bg-gradient-to-r from-primary to-primary/70 text-white shadow-lg'
+                    : 'text-gray-300 hover:bg-gray-800/50 hover:text-white'
                   }`
                 }
               >
@@ -155,16 +172,17 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   className="w-5 h-5 transition-transform duration-200 group-hover:scale-110"
                 />
                 <span className="font-semibold">Roles</span>
-              </NavLink>
+              </NavLink> 
+              */}
 
+              {/* 
               <NavLink
                 to="/contracts"
                 className={({ isActive }) =>
                   `group relative flex items-center gap-3 rounded-lg px-4 py-2.5 font-medium transition-all duration-200 ease-in-out
-                  ${
-                    isActive
-                      ? 'bg-gradient-to-r from-primary to-primary/70 text-white shadow-lg'
-                      : 'text-gray-300 hover:bg-gray-800/50 hover:text-white'
+                  ${isActive
+                    ? 'bg-gradient-to-r from-primary to-primary/70 text-white shadow-lg'
+                    : 'text-gray-300 hover:bg-gray-800/50 hover:text-white'
                   }`
                 }
               >
@@ -173,16 +191,17 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   className="w-5 h-5 transition-transform duration-200 group-hover:scale-110"
                 />
                 <span className="font-semibold">Contracts</span>
-              </NavLink>
+              </NavLink> 
+              */}
 
+              {/* 
               <NavLink
                 to="/bonuses"
                 className={({ isActive }) =>
                   `group relative flex items-center gap-3 rounded-lg px-4 py-2.5 font-medium transition-all duration-200 ease-in-out
-                  ${
-                    isActive
-                      ? 'bg-gradient-to-r from-primary to-primary/70 text-white shadow-lg'
-                      : 'text-gray-300 hover:bg-gray-800/50 hover:text-white'
+                  ${isActive
+                    ? 'bg-gradient-to-r from-primary to-primary/70 text-white shadow-lg'
+                    : 'text-gray-300 hover:bg-gray-800/50 hover:text-white'
                   }`
                 }
               >
@@ -192,6 +211,25 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 />
                 <span className="font-semibold">Bonuses</span>
               </NavLink>
+               */}
+
+              <NavLink
+                to="/settings"
+                className={({ isActive }) =>
+                  `group relative flex items-center gap-3 rounded-lg px-4 py-2.5 font-medium transition-all duration-200 ease-in-out
+                  ${isActive
+                    ? 'bg-gradient-to-r from-primary to-primary/70 text-white shadow-lg'
+                    : 'text-gray-300 hover:bg-gray-800/50 hover:text-white'
+                  }`
+                }
+              >
+                <FontAwesomeIcon
+                  icon={faGear}
+                  className="w-5 h-5 transition-transform duration-200 group-hover:scale-110"
+                />
+                <span className="font-semibold">Settings</span>
+              </NavLink>
+
             </ul>
           </div>
         </nav>

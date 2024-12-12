@@ -22,7 +22,7 @@ const mockLocations: Location[] = [
     updated_at: '2023-01-15'
   },
   {
-    id: 2, 
+    id: 2,
     name: 'Lyon',
     base_salary: 38000,
     cost_of_living_index: 7.2,
@@ -52,7 +52,7 @@ const Locations: React.FC = () => {
     <div className="p-4">
       <div className="mb-8 flex justify-between items-center">
         <h1 className="text-2xl font-bold text-gray-800 dark:text-white">Gestion des Localisations</h1>
-        
+
         <div className="flex gap-4">
           <div className="relative">
             <input
@@ -62,12 +62,12 @@ const Locations: React.FC = () => {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <FontAwesomeIcon 
+            <FontAwesomeIcon
               icon={faSearch}
               className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
             />
           </div>
-          
+
           <button
             onClick={() => setShowAddModal(true)}
             className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/80 transition-colors duration-200"
@@ -83,15 +83,15 @@ const Locations: React.FC = () => {
           <Card
             key={location.id}
             title={location.name}
-            onEdit={() => {}}
-            onDelete={() => {}}
+            onEdit={() => { }}
+            onDelete={() => { }}
             lastUpdated={location.updated_at}
           >
             <div className="flex justify-between items-center">
               <span className="text-gray-600 dark:text-gray-400">Salaire de base:</span>
               <span className="font-semibold dark:text-white">{location.base_salary.toLocaleString()} €</span>
             </div>
-            
+
             <div className="flex justify-between items-center">
               <span className="text-gray-600 dark:text-gray-400">Indice du coût de la vie:</span>
               <span className="font-semibold dark:text-white">{location.cost_of_living_index}/10</span>
@@ -103,6 +103,7 @@ const Locations: React.FC = () => {
       <ModalAdd
         isOpen={showAddModal}
         onClose={() => setShowAddModal(false)}
+        onSave={() => { console.log('save') }}
         title="Ajouter une localisation"
       >
         <div className="space-y-4">

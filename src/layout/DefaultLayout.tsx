@@ -31,7 +31,10 @@ const DefaultLayout = forwardRef<HTMLDivElement, DefaultLayoutProps>(
           <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-auto">
             {/* <!-- ===== Header Start ===== --> */}
             {(isKnownPage || currentPath === '/') && (
-              <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+              <Header
+                sidebarOpen={sidebarOpen}
+                setSidebarOpen={setSidebarOpen}
+                user={{ name: 'Arnauld Wilfride', role: 'Informaticien', profile: 'https://via.placeholder.com/150' }} />
             )}
             {/* <!-- ===== Header End ===== --> */}
 
