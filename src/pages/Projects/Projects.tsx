@@ -35,7 +35,7 @@ interface ProjectFormData {
   date_completude: string;
   date_pdb: string;
   amount_due_client: number;
-  apporteur_affaire: boolean;
+  apporteur_affaire: string;
   client_name: string;
   client_number: string;
 }
@@ -109,9 +109,10 @@ const Projects: React.FC = () => {
     navigate(`/projects/edit/${projectId}`);
   };
 
-  const handleDelete = (projectId: number) => {
+  const handleDelete = async (projectId: number) => {
     try {
       if (window.confirm('Êtes-vous sûr de vouloir supprimer ce projet ?')) {
+        await apiClient.delete(`/projects/${projectId}`);
         setProjects((prev) => prev.filter((project) => project.id !== projectId));
         setFilteredProjects((prev) => prev.filter((project) => project.id !== projectId));
       }
@@ -124,14 +125,23 @@ const Projects: React.FC = () => {
     try {
       const projectData = {
         ...data,
+        user_id: parseInt(data.user_id, 10),
         date_completude: null,
+        apporteur_affaire: data.apporteur_affaire
       };
+
+      console.log(projectData);
+      // return
 
       const response = await apiClient.post('/projects/', projectData);
       const newProject: any = response;
 
-      setProjects((prev) => [...prev, newProject]);
-      setFilteredProjects((prev) => [...prev, newProject]);
+      // Récupérer le projet nouvellement créé
+      const createdProject = await apiClient.get(`/projects/${newProject.id}`);
+      const project: any = createdProject;
+
+      setProjects((prev) => [...prev, project]);
+      setFilteredProjects((prev) => [...prev, project]);
       
       reset();
       setShowAddModal(false);
@@ -310,7 +320,7 @@ const Projects: React.FC = () => {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Parcelle
+              Parcelle(m²)
             </label>
             <Input
               register={register('parcelle')}
@@ -350,6 +360,20 @@ const Projects: React.FC = () => {
               name="amount_due_client"
               type="number"
               placeholder="Entrez le montant"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Apporteur d'affaire
+            </label>
+            <Select
+              register={register('apporteur_affaire')}
+              name="apporteur_affaire"
+              options={[
+                { value: 'true', label: 'Oui' },
+                { value: 'false', label: 'Non' },
+              ]}
+              placeholder="Sélectionnez oui ou non"
             />
           </div>
           <div>
