@@ -11,7 +11,14 @@ const DefaultLayout = forwardRef<HTMLDivElement, DefaultLayoutProps>(
   ({ children }, ref) => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const currentPath = location.pathname;
-    const isKnownPage = pages.some((page) => page.path === currentPath);
+    
+    // Vérifie si le chemin actuel est une page ou une route dynamique
+    const isKnownPage = pages.some((page) => {
+      // Gère les routes dynamiques avec paramètres (ex: /users/edit/:id)
+      const pathPattern = page.path.replace(/:\w+/g, '[^/]+');
+      const regex = new RegExp(`^${pathPattern}$`);
+      return regex.test(currentPath);
+    });
 
     if (!isKnownPage) {
       return <>{children}</>;

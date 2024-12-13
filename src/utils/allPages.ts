@@ -1,4 +1,4 @@
-import { Login, Dashboard, Users, Locations, Roles, Contracts, Bonuses } from '../pages';
+import { Login, Dashboard, Users, Locations, Roles, Contracts, Bonuses, Payments, ProjectsEdit, UsersEdit, PaymentsEdit } from '../pages';
 import NotFound from '../common/NotFound';
 import Projects from '../pages/Projects/Projects';
 
@@ -22,6 +22,12 @@ export const pages = [
     loader: "auth",
   },
   {
+    path: '/users/edit/:id',
+    name: 'Modifier Utilisateur',
+    component: UsersEdit,
+    loader: "auth",
+  },
+  {
     path: '/locations',
     name: 'Emplacements',
     component: Locations,
@@ -31,6 +37,12 @@ export const pages = [
     path: '/projects',
     name: 'Projets',
     component: Projects,
+    loader: "auth",
+  },
+  {
+    path: '/projects/edit/:id',
+    name: 'Modifier Projet',
+    component: ProjectsEdit,
     loader: "auth",
   },
   {
@@ -49,6 +61,18 @@ export const pages = [
     path: '/bonuses',
     name: 'Bonus',
     component: Bonuses,
+    loader: "auth",
+  },
+  {
+    path: '/payments',
+    name: 'Paiements',
+    component: Payments,
+    loader: "auth",
+  },
+  {
+    path: '/payments/edit/:id',
+    name: 'Modifier Paiement',
+    component: PaymentsEdit,
     loader: "auth",
   },
   {

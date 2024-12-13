@@ -1,14 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { ErrorMessage, Input } from '../../components';
 import { useForm } from 'react-hook-form';
 import { login } from '../../redux/features/authSlice';
 import expirateTimer from '../../utils/expirationResponseMessage';
 import { useNavigate } from 'react-router-dom';
+import apiClient from '../../api/axios';
 
 interface LoginFormData {
   email: string;
   password: string;
+}
+
+interface LoginResponse {
+  access_token: string;
+  token_type: string;
+  role: string;
+  id: number;
 }
 
 const Login: React.FC = () => {
@@ -22,34 +30,46 @@ const Login: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const navigation = useNavigate();
 
-  // useEffect(() => {
-  //   const authUser = {
-  //     id: 1,
-  //     firstName: 'Kadidja',
-  //     lastName: 'Abdo',
-  //     email: 'kadidja@gmail.com',
-  //     phoneNumber: '0780853613',
-  //     role: 'RH',
-  //   };
+  const onSubmit = async (data: LoginFormData) => {
+    try {
+      const formData = new URLSearchParams();
+      formData.append('username', data.email);
+      formData.append('password', data.password);
 
-  //   dispatch(login(authUser));
-  //   navigation('/dashboard');
-  // }, []);
+      const response = await apiClient.post('/users/login/', formData, {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      });
+      const userData: any = response;
 
-  const onSubmit = (data: LoginFormData) => {
-    if (data.email === 'kadidja@gmail.com' && data.password === 'kadi123') {
-      const authUser = {
-        id: 1,
-        firstName: 'Kadidja',
-        lastName: 'Abdo',
-        email: data.email,
-        phoneNumber: '0780853613',
-        role: 'RH',
-      };
+      if (userData.role === 'ADMIN') {
+        // Store user data in localStorage
+        localStorage.setItem('userId', userData.id.toString());
+        localStorage.setItem('accessToken', userData.access_token);
 
-      dispatch(login(authUser));
-      navigation('/dashboard');
-    } else {
+        console.log(userData.id);
+        
+        // Get complete user data
+        const userDetailsResponse = await apiClient.get(`/users/${userData.id}`);
+        const userDetails: any = userDetailsResponse;
+
+        // Dispatch complete user data to Redux store
+        dispatch(login({
+          id: userData.id,
+          firstName: userDetails.first_name || '',
+          lastName: userDetails.last_name || '',
+          email: userDetails.email || data.email,
+          phoneNumber: userDetails.phone_number || '',
+          role: userData.role
+        }));
+
+        navigation('/dashboard');
+      } else {
+        setErrorMessage('Accès non autorisé');
+        expirateTimer(setErrorMessage);
+      }
+    } catch (error) {
       const message = 'Identifiants incorrects';
       setErrorMessage(message);
       expirateTimer(setErrorMessage);
